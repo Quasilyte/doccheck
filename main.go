@@ -29,7 +29,7 @@ func main() {
 		log.Fatalf("parse path: %v", err)
 	}
 
-	initRegexps(l)
+	l.Init()
 
 	for _, pkg := range packages {
 		l.CheckPackage(pkg)
@@ -59,7 +59,11 @@ type linter struct {
 	issues int
 }
 
-func initRegexps(l *linter) {
+func (l *linter) Init() {
+	l.initRegexps()
+}
+
+func (l *linter) initRegexps() {
 	{
 		prefixes := []string{
 			"Has",
